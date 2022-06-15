@@ -1,9 +1,11 @@
 import 'package:credoapp_example/utils/styles.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 
-import 'colors.dart';
+/* import 'package:flutter/cupertino.dart';
+import 'colors.dart'; */
 
+//ignore: must_be_immutable
 class CustomButton extends StatefulWidget {
   var width, height, title;
   Color color;

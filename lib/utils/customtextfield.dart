@@ -1,7 +1,7 @@
 import 'package:credoapp_example/utils/styles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+//ignore: must_be_immutable
 class CustomTextField extends StatefulWidget {
   var width, height, title;
   bool keyboardTypenumeric, number;

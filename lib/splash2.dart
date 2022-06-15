@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:credoapp_example/utils/route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+//import 'package:flutter/services.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
 
 import 'main.dart';
 
@@ -16,7 +16,7 @@ class Splash2 extends StatefulWidget {
 class _Splash extends State<Splash2> with SingleTickerProviderStateMixin {
   var token, lat, long;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  late AnimationController _animationController;
+  //late AnimationController _animationController;
   late double currentValue;
   late Animation<double> curveAnimation;
 
@@ -30,7 +30,7 @@ class _Splash extends State<Splash2> with SingleTickerProviderStateMixin {
     // AppRoutes.replace(context, Languages());
   }
 
-  _splashdelay() async {
+  /* _splashdelay() async {
     _animationController =
         AnimationController(duration: Duration(seconds: 3), vsync: this);
     curveAnimation = CurvedAnimation(
@@ -44,7 +44,7 @@ class _Splash extends State<Splash2> with SingleTickerProviderStateMixin {
       }
     });
     _animationController.forward();
-  }
+  } */
 
   @override
   void initState() {

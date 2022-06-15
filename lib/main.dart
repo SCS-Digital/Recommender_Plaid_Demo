@@ -1,22 +1,25 @@
-// @dart=2.9
-import 'dart:convert';
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:another_flushbar/flushbar.dart';
-import 'package:credoapp_example/screens/nextscreen.dart';
-import 'package:credoapp_example/showdata.dart';
 import 'package:credoapp_example/splash.dart';
-import 'package:credoapp_example/splash2.dart';
 import 'package:credoapp_example/utils/colors.dart';
 import 'package:credoapp_example/utils/const.dart';
 import 'package:credoapp_example/utils/custombutton.dart';
 import 'package:credoapp_example/utils/customtextfield.dart';
-import 'package:credoapp_example/utils/route.dart';
 import 'package:credoapp_example/utils/styles.dart';
-// import 'package:credoappsdk/credoappsdk.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:plaid_flutter/plaid_flutter.dart';
+
+/*
+import 'dart:convert';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:credoapp_example/screens/nextscreen.dart';
+import 'package:credoapp_example/showdata.dart';
+import 'package:credoapp_example/splash2.dart';
+import 'package:credoapp_example/utils/route.dart';
+import 'package:credoappsdk/credoappsdk.dart';
+import 'package:email_validator/email_validator.dart';
+*/
 
 void dialogBox() {
   EasyLoading.instance
@@ -33,7 +36,7 @@ void dialogBox() {
 
 void main() async {
   dialogBox();
-  runApp(const MyApp());
+  runApp(MyApp());
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -43,7 +46,7 @@ void main() async {
 // const platform = const MethodChannel('app.channel.shared.data');
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -80,7 +83,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key key, @required this.title}) : super(key: key);
+  const MyHomePage({Key? key, @required this.title}) : super(key: key);
   final String title;
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -95,6 +98,42 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController mobileNo = TextEditingController();
   var width, height;
   GlobalKey<FormState> formKey = new GlobalKey<FormState>();
+  late LinkTokenConfiguration _linkTokenConfiguration;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _linkTokenConfiguration = LinkTokenConfiguration(
+      token: "link-sandbox-0747b87c-65d6-4cc3-ac09-26c51d02a45d",
+    );
+
+    PlaidLink.onSuccess(_onSuccessCallback);
+    PlaidLink.onEvent(_onEventCallback);
+    PlaidLink.onExit(_onExitCallback);
+  }
+
+  void _onSuccessCallback(String publicToken, LinkSuccessMetadata metadata) {
+    print("onSuccess: $publicToken, metadata: ${metadata.description()}");
+  }
+
+  void _onEventCallback(String event, LinkEventMetadata metadata) {
+    print("onEvent: $event, metadata: ${metadata.description()}");
+  }
+
+  void _onExitCallback(LinkError? error, LinkExitMetadata metadata) {
+    print("onExit metadata: ${metadata.description()}");
+
+    if (error != null) {
+      print("onExit error: ${error.description()}");
+    }
+  }
+
+  void callPlaid() {
+    print("in button press");
+    PlaidLink.open(configuration: _linkTokenConfiguration);
+  }
+
   @override
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width;
@@ -288,65 +327,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      // GestureDetector(
-                                      //   onTap: () async {
-                                      //     // await platform
-                                      //     //     .invokeMethod("getSharedText");
-
-                                      //     if (controller.text.isEmpty ||
-                                      //         email.text.isEmpty ||
-                                      //         offerCode.text.isEmpty) {
-                                      //       Flushbar(
-                                      //         message:
-                                      //             "Please Enter Required Fields!",
-                                      //         flushbarPosition:
-                                      //             FlushbarPosition.TOP,
-                                      //         duration: Duration(seconds: 3),
-                                      //         leftBarIndicatorColor:
-                                      //             Colors.blue[300],
-                                      //         onTap: (value) {
-                                      //           // navigatorKey.currentState.push(MaterialPageRoute(
-                                      //           //   builder: (_) => PendingOrderTracking(),
-
-                                      //           // ));
-                                      //         },
-                                      //       )..show(context);
-                                      //     } else {
-                                      //       AppRoutes.push(
-                                      //           context, NextScreen());
-                                      //     }
-                                      //     //   bool isValid = EmailValidator.validate(
-                                      //     //       controller1.text);
-                                      //     //   if (isValid) {
-
-                                      //     //   } else {
-                                      //     //     // ignore: avoid_single_cascade_in_expression_statements
-                                      //     //     Flushbar(
-                                      //     //       message:
-                                      //     //           "Please Enter Valid Email Address!",
-                                      //     //       flushbarPosition:
-                                      //     //           FlushbarPosition.TOP,
-                                      //     //       duration: Duration(seconds: 3),
-                                      //     //       leftBarIndicatorColor:
-                                      //     //           Colors.blue[300],
-                                      //     //       onTap: (value) {
-                                      //     //         // navigatorKey.currentState.push(MaterialPageRoute(
-                                      //     //         //   builder: (_) => PendingOrderTracking(),
-
-                                      //     //         // ));
-                                      //     //       },
-                                      //     //     )..show(context);
-                                      //     //   }
-                                      //     // }
-                                      //   },
-                                      //   child: CustomButton(
-                                      //     width: width * .45,
-                                      //     height: height * .06,
-                                      //     color: mainColor,
-                                      //     title: "Next",
-                                      //   ),
-                                      // ),
-
                                       GestureDetector(
                                         onTap: () async {
                                           // await platform
@@ -378,29 +358,49 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 mobileNo.text,
                                                 offerCode.text);
                                           }
-                                          //   bool isValid = EmailValidator.validate(
-                                          //       controller1.text);
-                                          //   if (isValid) {
+                                        },
+                                        child: ElevatedButton(
+                                          onPressed: () => callPlaid(),
+                                          child: Text(
+                                              "Open Plaid Link (Link Token)"),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () async {
+                                          // await platform
+                                          //     .invokeMethod("getSharedText");
 
-                                          //   } else {
-                                          //     // ignore: avoid_single_cascade_in_expression_statements
-                                          //     Flushbar(
-                                          //       message:
-                                          //           "Please Enter Valid Email Address!",
-                                          //       flushbarPosition:
-                                          //           FlushbarPosition.TOP,
-                                          //       duration: Duration(seconds: 3),
-                                          //       leftBarIndicatorColor:
-                                          //           Colors.blue[300],
-                                          //       onTap: (value) {
-                                          //         // navigatorKey.currentState.push(MaterialPageRoute(
-                                          //         //   builder: (_) => PendingOrderTracking(),
+                                          if (controller.text.isEmpty ||
+                                              email.text.isEmpty ||
+                                              offerCode.text.isEmpty) {
+                                            Flushbar(
+                                              message:
+                                                  "Please Enter Required Fields!",
+                                              flushbarPosition:
+                                                  FlushbarPosition.TOP,
+                                              duration: Duration(seconds: 3),
+                                              leftBarIndicatorColor:
+                                                  Colors.blue[300],
+                                              onTap: (value) {
+                                                // navigatorKey.currentState.push(MaterialPageRoute(
+                                                //   builder: (_) => PendingOrderTracking(),
 
-                                          //         // ));
-                                          //       },
-                                          //     )..show(context);
-                                          //   }
-                                          // }
+                                                // ));
+                                              },
+                                            )..show(context);
+                                          } else {
+                                            customDialog(
+                                                context,
+                                                "Mobile scoring will analyze metadata and other non-persoanl data on your phone and calculate a score that does not look at any of your personal information. Do you agree that we may collect this information",
+                                                email.text,
+                                                mobileNo.text,
+                                                offerCode.text);
+                                          }
                                         },
                                         child: CustomButton(
                                           width: width * .45,

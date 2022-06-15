@@ -1,20 +1,23 @@
-import 'dart:convert';
-import 'dart:io';
-
+import 'dart:async';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:credoapp_example/main.dart';
-import 'package:credoapp_example/screens/nextscreen.dart';
 import 'package:credoapp_example/utils/colors.dart';
 import 'package:credoapp_example/utils/route.dart';
 import 'package:credoapp_example/utils/styles.dart';
-// import 'package:credoappsdk/credoappsdk.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-// import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:path_provider/path_provider.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:plaid_flutter/plaid_flutter.dart';
+/* 
+import 'package:path_provider/path_provider.dart';
+import 'package:credoapp_example/screens/nextscreen.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:io';
+import 'package:flutter/services.dart';
+ */
 
 Future<void> showAlertDialog(context, data, message) async {
   return showDialog(
@@ -240,6 +243,7 @@ Future<void> customDialog(context, message, email, mobileNo, offerCode) async {
   );
 }
 
+/* 
 Future<void> _deleteCacheDir() async {
   var tempDir = await getTemporaryDirectory();
   if (tempDir.existsSync()) {
@@ -253,7 +257,7 @@ Future<void> _deleteAppDir() async {
     appDocDir.deleteSync(recursive: true);
   }
 }
-
+ */
 Future<void> callFunction(context, email, mobileNo, offerCode) async {
   EasyLoading.show();
   Map<String, dynamic> data = <String, dynamic>{
@@ -262,8 +266,41 @@ Future<void> callFunction(context, email, mobileNo, offerCode) async {
     "mobileNo": mobileNo,
   };
   print("data: $data");
-  const platform = const MethodChannel('flutter.native/helper');
 
+  //late LegacyLinkConfiguration _publicKeyConfiguration;
+
+  //call Plaid
+
+/* resp = await http.post(
+    Uri.parse('https://jsonplaceholder.typicode.com/albums'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'title': title,
+    }),
+  ); */
+
+  try {
+    LinkConfiguration configuration = LinkTokenConfiguration(
+      token: "link-sandbox-07b9b2ce-bdfe-4f8b-b661-fe92f89f3621",
+    );
+
+    PlaidLink.onSuccess(_onSuccessCallback);
+    PlaidLink.onEvent(_onEventCallback);
+    PlaidLink.onExit(_onExitCallback);
+
+    EasyLoading.dismiss();
+
+    PlaidLink.open(configuration: configuration);
+  } catch (value) {
+    toast("${value}", context);
+    EasyLoading.dismiss();
+    print("${value}");
+  }
+
+  /* 
+  const platform = const MethodChannel('flutter.native/helper');
   var sharedData =
       await platform.invokeMethod("changeColor", data).then((value) {
     print("hello worlds vales: $value");
@@ -338,6 +375,23 @@ Future<void> callFunction(context, email, mobileNo, offerCode) async {
     print("after calling  error: $onError");
   });
   print("return data:: $sharedData");
+   */
+}
+
+void _onSuccessCallback(String publicToken, LinkSuccessMetadata metadata) {
+  print("onSuccess: $publicToken, metadata: ${metadata.description()}");
+}
+
+void _onEventCallback(String event, LinkEventMetadata metadata) {
+  print("onEvent: $event, metadata: ${metadata.description()}");
+}
+
+void _onExitCallback(LinkError? error, LinkExitMetadata metadata) {
+  print("onExit metadata: ${metadata.description()}");
+
+  if (error != null) {
+    print("onExit error: ${error.description()}");
+  }
 }
 
 // Future<void> collectData(context, url, authKey, ref) async {

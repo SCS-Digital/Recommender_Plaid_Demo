@@ -5,9 +5,10 @@ import 'package:credoapp_example/utils/custombutton.dart';
 import 'package:credoapp_example/utils/customtextfield.dart';
 import 'package:credoapp_example/utils/route.dart';
 import 'package:credoapp_example/utils/styles.dart';
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+//ignore: must_be_immutable
 class NextScreen extends StatefulWidget {
   var userId;
   NextScreen({@required this.userId});

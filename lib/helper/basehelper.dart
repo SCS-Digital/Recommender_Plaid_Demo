@@ -1,21 +1,24 @@
-import 'dart:io' as Io;
 import 'dart:io';
+import 'dart:convert';
 
 import 'package:credoapp_example/helper/apinames.dart';
-import 'package:credoapp_example/main.dart';
 import 'package:credoapp_example/utils/const.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:http/http.dart' as http;
+
+/* 
+import 'dart:io' as Io;
+import 'package:credoapp_example/main.dart';
 import 'package:credoapp_example/utils/route.dart';
 import 'package:crypto/crypto.dart';
 import 'package:encrypt/encrypt.dart';
 import 'package:encrypt/encrypt_io.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:encrypt/encrypt.dart' as enc;
 
+import 'package:encrypt/encrypt.dart' as enc;
+ */
 class BaseHelper {
   Future<dynamic> loginUser({email, password, userid, context}) async {
-    var token = "4373651c-9ba5-3a49-825f-88056e20dc2f";
+    //var token = "4373651c-9ba5-3a49-825f-88056e20dc2f";
     var skey = "tVTRDZQCFPee2fcZgSlrpuperfca";
     var secret = "dRYb1KETirsq4fk_bSNEBVHNTfYa";
     var credentials = skey + ':' + secret;

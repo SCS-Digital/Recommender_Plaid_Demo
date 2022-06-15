@@ -1,8 +1,9 @@
 import 'package:credoapp_example/utils/route.dart';
 import 'package:credoapp_example/utils/styles.dart';
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+//ignore: must_be_immutable
 class ShowData extends StatefulWidget {
   var data;
   ShowData({@required this.data});
