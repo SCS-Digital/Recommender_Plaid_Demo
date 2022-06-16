@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Plaid Demo',
+        title: 'Plaid Integration',
         debugShowCheckedModeBanner: false,
         builder: EasyLoading.init(),
         theme: ThemeData(
