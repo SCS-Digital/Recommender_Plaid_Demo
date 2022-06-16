@@ -1,5 +1,5 @@
-name: credoapp_example
-description: CredoApp SDK example project.
+name: recommender_example
+description: Recommender example project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.

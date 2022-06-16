@@ -1,4 +1,4 @@
-import 'package:credoapp_example/utils/styles.dart';
+import 'package:recommender_example/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 //ignore: must_be_immutable

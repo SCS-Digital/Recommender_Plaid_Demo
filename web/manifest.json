@@ -1,6 +1,6 @@
 {
-    "name": "credoapp_example",
-    "short_name": "credoapp_example",
+    "name": "recommender_example",
+    "short_name": "recommender_example",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

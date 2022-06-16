@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:credoapp_example/utils/route.dart';
+import 'package:recommender_example/utils/route.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter/services.dart';
 
@@ -26,7 +26,7 @@ class _Splash extends State<Splash2> with SingleTickerProviderStateMixin {
   }
 
   void navigationpage() {
-    AppRoutes.makeFirst(context, MyHomePage(title: 'Ficanex'));
+    AppRoutes.makeFirst(context, MyHomePage(title: 'Recommender - Plaid'));
     // AppRoutes.replace(context, Languages());
   }
 

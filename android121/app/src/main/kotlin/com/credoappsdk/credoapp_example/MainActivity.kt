@@ -1,4 +1,4 @@
-package com.credoappsdk.credoapp_example
+package com.recommender.recommender_example
 
 import android.Manifest
 import android.app.ProgressDialog

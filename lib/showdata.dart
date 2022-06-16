@@ -1,5 +1,5 @@
-import 'package:credoapp_example/utils/route.dart';
-import 'package:credoapp_example/utils/styles.dart';
+import 'package:recommender_example/utils/route.dart';
+import 'package:recommender_example/utils/styles.dart';
 //import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

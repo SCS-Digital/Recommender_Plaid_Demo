@@ -1,15 +1,15 @@
 import 'dart:io';
 import 'dart:convert';
 
-import 'package:credoapp_example/helper/apinames.dart';
-import 'package:credoapp_example/utils/const.dart';
+import 'package:recommender_example/helper/apinames.dart';
+import 'package:recommender_example/utils/const.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
 
 /* 
 import 'dart:io' as Io;
-import 'package:credoapp_example/main.dart';
-import 'package:credoapp_example/utils/route.dart';
+import 'package:recommender_example/main.dart';
+import 'package:recommender_example/utils/route.dart';
 import 'package:crypto/crypto.dart';
 import 'package:encrypt/encrypt.dart';
 import 'package:encrypt/encrypt_io.dart';

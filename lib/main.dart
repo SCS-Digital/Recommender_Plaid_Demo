@@ -1,10 +1,10 @@
 import 'package:another_flushbar/flushbar.dart';
-import 'package:credoapp_example/splash.dart';
-import 'package:credoapp_example/utils/colors.dart';
-import 'package:credoapp_example/utils/const.dart';
-import 'package:credoapp_example/utils/custombutton.dart';
-import 'package:credoapp_example/utils/customtextfield.dart';
-import 'package:credoapp_example/utils/styles.dart';
+import 'package:recommender_example/splash.dart';
+import 'package:recommender_example/utils/colors.dart';
+import 'package:recommender_example/utils/const.dart';
+import 'package:recommender_example/utils/custombutton.dart';
+import 'package:recommender_example/utils/customtextfield.dart';
+import 'package:recommender_example/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -13,10 +13,10 @@ import 'package:plaid_flutter/plaid_flutter.dart';
 /*
 import 'dart:convert';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:credoapp_example/screens/nextscreen.dart';
-import 'package:credoapp_example/showdata.dart';
-import 'package:credoapp_example/splash2.dart';
-import 'package:credoapp_example/utils/route.dart';
+import 'package:recommender_example/screens/nextscreen.dart';
+import 'package:recommender_example/showdata.dart';
+import 'package:recommender_example/splash2.dart';
+import 'package:recommender_example/utils/route.dart';
 import 'package:credoappsdk/credoappsdk.dart';
 import 'package:email_validator/email_validator.dart';
 */
@@ -28,9 +28,9 @@ void dialogBox() {
     ..loadingStyle = EasyLoadingStyle.custom
     ..radius = 10
     ..textColor = mainColor2
-    ..indicatorColor = mainColor2
+    ..indicatorColor = textfieldColor
     ..dismissOnTap = false
-    ..indicatorType = EasyLoadingIndicatorType.pouringHourGlass
+    ..indicatorType = EasyLoadingIndicatorType.circle
     ..indicatorSize = 100;
 }
 
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Ficanex',
+        title: 'Plaid Demo',
         debugShowCheckedModeBanner: false,
         builder: EasyLoading.init(),
         theme: ThemeData(
@@ -60,30 +60,12 @@ class MyApp extends StatelessWidget {
         ),
         home:
             // Splash2()
-            Splash()
-        //  AnimatedSplashScreen(
-        //     duration: 100,
-        //     splashIconSize: 1000,
-        //     splash: Container(
-        //       width: 500,
-        //       height: 1000,
-        //       child: Image.asset(
-        //         "images/scoring.png",
-        //         width: 500,
-        //         fit: BoxFit.fill,
-        //         height: 100,
-        //       ),
-        //     ),
-        //     nextScreen: const MyHomePage(title: 'Ficanex'),
-        //     splashTransition: SplashTransition.decoratedBoxTransition,
-        //     // pageTransitionType: PageTransitionType,
-        //     backgroundColor: mainColor)
-        );
+            Splash());
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, @required this.title}) : super(key: key);
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -98,40 +80,10 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController mobileNo = TextEditingController();
   var width, height;
   GlobalKey<FormState> formKey = new GlobalKey<FormState>();
-  late LinkTokenConfiguration _linkTokenConfiguration;
 
   @override
   void initState() {
     super.initState();
-
-    _linkTokenConfiguration = LinkTokenConfiguration(
-      token: "link-sandbox-0747b87c-65d6-4cc3-ac09-26c51d02a45d",
-    );
-
-    PlaidLink.onSuccess(_onSuccessCallback);
-    PlaidLink.onEvent(_onEventCallback);
-    PlaidLink.onExit(_onExitCallback);
-  }
-
-  void _onSuccessCallback(String publicToken, LinkSuccessMetadata metadata) {
-    print("onSuccess: $publicToken, metadata: ${metadata.description()}");
-  }
-
-  void _onEventCallback(String event, LinkEventMetadata metadata) {
-    print("onEvent: $event, metadata: ${metadata.description()}");
-  }
-
-  void _onExitCallback(LinkError? error, LinkExitMetadata metadata) {
-    print("onExit metadata: ${metadata.description()}");
-
-    if (error != null) {
-      print("onExit error: ${error.description()}");
-    }
-  }
-
-  void callPlaid() {
-    print("in button press");
-    PlaidLink.open(configuration: _linkTokenConfiguration);
   }
 
   @override
@@ -324,7 +276,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   SizedBox(
                                     height: height * .02,
                                   ),
-                                  Row(
+                                  /* Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       GestureDetector(
@@ -366,7 +318,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         ),
                                       ),
                                     ],
-                                  ),
+                                  ), */
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [

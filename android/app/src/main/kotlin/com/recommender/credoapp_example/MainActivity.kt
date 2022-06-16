@@ -1,4 +1,4 @@
-package com.credoappsdk.credoapp_example
+package com.recommender.recommender_example
 
 import android.Manifest
 import android.app.ProgressDialog
@@ -11,6 +11,7 @@ import com.scs.scssdk.SCSSDK
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
+//import io.flutter.plugin.plaid_flutter
 
 val arrPerms = arrayOf(
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -31,7 +32,8 @@ class MainActivity: FlutterActivity() {
 
     @ExperimentalStdlibApi
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
-
+        super.configureFlutterEngine(flutterEngine)
+        flutterEngine.getPlugins().add(com.github.jorgefspereira.plaid_flutter.PlaidFlutterPlugin());
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler{
             call, result ->
 
